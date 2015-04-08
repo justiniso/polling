@@ -1,0 +1,3 @@
+include README.* setup.py LICENSE.* setup.cfg requirements.txt
+global-exclude *.pyc
+global-exclude *.pyo
