@@ -1,13 +1,14 @@
 polling
 =============
 
-Polling is a powerful python utility used to wait for a function to return a certain expected condition. Examples:
+Polling is a powerful python utility used to wait for a function to return a certain expected condition.
+Some possible uses cases include:
 
-    - Wait for API response to return with code 200
-    - Wait for a file to exist (or not exist)
-    - Wait for a thread lock on a resource to expire
+- Wait for API response to return with code 200
+- Wait for a file to exist (or not exist)
+- Wait for a thread lock on a resource to expire
 
-# Example: Poll every minute until a url returns 200 status code
+### Example: Poll every minute until a url returns 200 status code
 
     import requests
     polling.poll(
@@ -16,7 +17,7 @@ Polling is a powerful python utility used to wait for a function to return a cer
         poll_forever=True
     )
 
-# Example: Poll for a file to exist
+### Example: Poll for a file to exist
 
     # This call will wait until the file exists, checking every 0.1 seconds and stopping after 3 seconds have elapsed
     polling.poll(
@@ -26,7 +27,7 @@ Polling is a powerful python utility used to wait for a function to return a cer
         step=0.1
     )
 
-# Example: Using the polling timeout exception
+### Example: Using the polling timeout exception
 
     # An exception will be raised by the polling function on timeout (or the maximum number of calls is exceeded).
     # This exception will have a 'values' attribute. This is a queue with all values that did not meet the condition.
@@ -41,7 +42,7 @@ Polling is a powerful python utility used to wait for a function to return a cer
             print te.values.get()
 
 
-# Example: Using a custom condition callback function
+### Example: Using a custom condition callback function
 
     import requests
 
