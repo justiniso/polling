@@ -8,6 +8,12 @@ Some possible uses cases include:
 - Wait for a file to exist (or not exist)
 - Wait for a thread lock on a resource to expire
 
+# Installation
+
+    pip install polling
+
+# Examples
+
 ### Example: Poll every minute until a url returns 200 status code
 
     import requests
