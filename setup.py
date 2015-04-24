@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from setuptools import setup, find_packages
-from assertionchain import __version__
+from polling import __version__
 
 with open("./requirements.txt") as fp:
     requirements = fp.read()
@@ -9,11 +9,11 @@ with open("./requirements.txt") as fp:
 
 setup(
     name='polling',
-    description='',
+    description='Powerful polling utility with many configurable options',
     version=__version__,
     author='Justin Iso',
     author_email='justin+polling@justiniso.com',
-    url='',
+    url='http://github.com/justiniso/polling',
     download_url='',
     py_modules=['polling'],
     install_requires=requirements,
