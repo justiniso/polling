@@ -26,12 +26,15 @@ Some possible uses cases include:
 ### Example: Poll for a file to exist
 
     # This call will wait until the file exists, checking every 0.1 seconds and stopping after 3 seconds have elapsed
-    polling.poll(
+    file_handle = polling.poll(
         lambda: open('/tmp/myfile.txt'),
         ignore_exceptions=(IOError,),
         timeout=3,
         step=0.1
     )
+
+    # Polling will return the value of your polling function, so you can now interact with it
+    file_handle.close()
 
 ### Example: Using the polling timeout exception
 

@@ -7,7 +7,7 @@ from Queue import Queue
 
 
 class PollingException(Exception):
-    """TODO"""
+    """Base exception that stores all return values of attempted polls"""
     def __init__(self, values):
         self.values = values
 
