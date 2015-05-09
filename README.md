@@ -35,6 +35,19 @@ Some possible uses cases include:
 
     # Polling will return the value of your polling function, so you can now interact with it
     file_handle.close()
+    
+### Example: Polling for Selenium WebDriver elements
+
+    from selenium import webdriver
+    driver = webdriver.Firefox()
+    
+    driver.get('http://google.com')
+    search_box = polling.poll(
+        lambda: driver.find_element_by_id('search'),
+        step=0.5,
+        timeout=7
+    )
+    search_box.send_keys('python polling')
 
 ### Example: Using the polling timeout exception
 
