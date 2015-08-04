@@ -61,9 +61,23 @@ class TestPoll(unittest.TestCase):
             polling.poll(lambda: False, step=10, timeout=-1)
         except polling.TimeoutException, e:
             assert e.values.qsize() == 1, 'There should have been 1 value pushed to the queue of values'
+            assert e.last is False, 'The last value was incorrect'
         else:
             assert False, 'No timeout exception raised'
 
         # Test happy path timeout
         val = polling.poll(lambda: True, step=0, timeout=0)
         assert val is True, 'Val was: {} != {}'.format(val, True)
+
+    def test_max_call_exception(self):
+        """
+        Test that a MaxCallException will be raised 
+        """
+        tries = 100
+        try:
+            polling.poll(lambda: False, step=0, max_tries=tries)
+        except polling.MaxCallException, e:
+            assert e.values.qsize() == tries, 'Poll function called the incorrect number of times'
+            assert e.last is False, 'The last value was incorrect'
+        else:
+            assert False, 'No MaxCallException raised'
