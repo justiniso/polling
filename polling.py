@@ -1,6 +1,6 @@
 """Polling module containing all exceptions and helpers used for the polling function"""
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 import time
 from Queue import Queue
@@ -8,8 +8,9 @@ from Queue import Queue
 
 class PollingException(Exception):
     """Base exception that stores all return values of attempted polls"""
-    def __init__(self, values):
+    def __init__(self, values, last=None):
         self.values = values
+        self.last = last
 
 
 class TimeoutException(PollingException):
@@ -92,25 +93,28 @@ def poll(target, step, args=(), kwargs=None, timeout=None, max_tries=None, check
     max_time = time.time() + timeout if timeout else None
     tries = 0
 
+    last_item = None
     while True:
+
+        if max_tries is not None and tries >= max_tries:
+            raise MaxCallException(values, last_item)
 
         try:
             val = target(*args, **kwargs)
-            values.put(val)
+            last_item = val
         except ignore_exceptions, e:
-            values.put(e)
+            last_item = e
         else:
             # Condition passes, this is the only "successful" exit from the polling function
             if check_success(val):
                 return val
 
-        # Check the "failure" exit conditions
-        if max_time is not None and time.time() >= max_time:
-            raise TimeoutException(values)
-        elif max_tries is not None and tries >= max_tries:
-            raise MaxCallException(values)
-
+        values.put(last_item)
         tries += 1
+
+        # Check the time after to make sure the poll function is called at least once
+        if max_time is not None and time.time() >= max_time:
+            raise TimeoutException(values, last_item)
 
         time.sleep(step)
         step = step_function(step)
