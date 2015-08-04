@@ -79,3 +79,14 @@ Some possible uses cases include:
         timeout=10
     )
 
+# Release notes
+
+## 0.2.0
+
+- Allow users to access a "last" attribute on the exceptions. This should hold the last evaluated value, which is the more common use case than getting the first value. 
+- Fix a bug that actually ran 1 more time than value specified by max_tries
+
+## 0.1.0
+
+- First version
+
