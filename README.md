@@ -21,8 +21,7 @@ import requests
 polling.poll(
     lambda: requests.get('http://google.com').status_code == 200,
     step=60,
-    poll_forever=True
-)
+    poll_forever=True)
 ```
 
 ### Example: Poll for a file to exist
@@ -33,8 +32,7 @@ file_handle = polling.poll(
     lambda: open('/tmp/myfile.txt'),
     ignore_exceptions=(IOError,),
     timeout=3,
-    step=0.1
-)
+    step=0.1)
 
 # Polling will return the value of your polling function, so you can now interact with it
 file_handle.close()
@@ -50,8 +48,8 @@ driver.get('http://google.com')
 search_box = polling.poll(
     lambda: driver.find_element_by_id('search'),
     step=0.5,
-    timeout=7
-)
+    timeout=7)
+
 search_box.send_keys('python polling')
 ```
 
@@ -85,8 +83,7 @@ polling.poll(
     lambda: requests.put('http://mysite.com/api/user', data={'username': 'Jill'},
     check_success=is_correct_response,
     step=1,
-    timeout=10
-)
+    timeout=10)
 ```
 
 # Release notes
