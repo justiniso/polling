@@ -3,7 +3,10 @@
 __version__ = '0.2.0'
 
 import time
-from Queue import Queue
+try:
+    from Queue import Queue
+except ImportError:
+    from queue import Queue
 
 
 class PollingException(Exception):
@@ -102,7 +105,7 @@ def poll(target, step, args=(), kwargs=None, timeout=None, max_tries=None, check
         try:
             val = target(*args, **kwargs)
             last_item = val
-        except ignore_exceptions, e:
+        except ignore_exceptions as e:
             last_item = e
         else:
             # Condition passes, this is the only "successful" exit from the polling function
