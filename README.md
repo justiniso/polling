@@ -24,6 +24,17 @@ polling.poll(
     poll_forever=True)
 ```
 
+If you are creating a new cloud provider instance (e.g. waiting for an EC2 instance to come online), you can continue to poll despite getting ConnectionErrors:
+
+```python
+import requests
+polling.poll(
+    lambda: requests.get('your.instance.ip').status_code == 200,
+    step=60,
+    ignore_exceptions=(requests.exceptions.ConnectionError,),
+    poll_forever=True)
+```
+
 ### Example: Poll for a file to exist
 
 ```python
