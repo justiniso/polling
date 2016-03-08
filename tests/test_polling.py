@@ -59,7 +59,7 @@ class TestPoll(unittest.TestCase):
         # Since the timeout is < 0, the first iteration of polling should raise the error if max timeout < 0
         try:
             polling.poll(lambda: False, step=10, timeout=-1)
-        except polling.TimeoutException, e:
+        except polling.TimeoutException as e:
             assert e.values.qsize() == 1, 'There should have been 1 value pushed to the queue of values'
             assert e.last is False, 'The last value was incorrect'
         else:
@@ -76,7 +76,7 @@ class TestPoll(unittest.TestCase):
         tries = 100
         try:
             polling.poll(lambda: False, step=0, max_tries=tries)
-        except polling.MaxCallException, e:
+        except polling.MaxCallException as e:
             assert e.values.qsize() == tries, 'Poll function called the incorrect number of times'
             assert e.last is False, 'The last value was incorrect'
         else:
