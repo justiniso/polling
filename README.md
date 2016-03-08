@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/justiniso/polling.svg?branch=master)](https://travis-ci.org/justiniso/polling)
+
 polling
 =============
 
