@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/justiniso/polling.svg?branch=master)](https://travis-ci.org/justiniso/polling)
+[![PyPI](https://img.shields.io/pypi/dm/polling.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/polling.svg)]()
 
 polling
 =============
