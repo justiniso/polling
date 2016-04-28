@@ -103,6 +103,10 @@ polling.poll(
 
 # Release notes
 
+## 0.3.0
+
+- Support Python 3.4+
+
 ## 0.2.0
 
 - Allow users to access a "last" attribute on the exceptions. This should hold the last evaluated value, which is the more common use case than getting the first value. 
