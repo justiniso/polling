@@ -95,7 +95,7 @@ def is_correct_response(response):
     return response == 'success'
 
 polling.poll(
-    lambda: requests.put('http://mysite.com/api/user', data={'username': 'Jill'},
+    lambda: requests.put('http://mysite.com/api/user'), data={'username': 'Jill'},
     check_success=is_correct_response,
     step=1,
     timeout=10)
