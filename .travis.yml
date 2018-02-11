@@ -4,7 +4,7 @@ python:
   - "2.7"
   - "3.4"
 install:
-  - pip install -r requirements.txt
+  - pip install -r requirements_tests.txt
   - pip install coveralls
 script:
     coverage run --source=polling setup.py test

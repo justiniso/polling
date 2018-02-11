@@ -3,9 +3,9 @@
 from setuptools import setup, find_packages
 from polling import __version__
 
-with open("./requirements.txt") as fp:
-    requirements = fp.read()
-    requirements = requirements.split("\n")
+with open("requirements_tests.txt") as fp:
+    requirements_tests = fp.read()
+    requirements_tests = requirements_tests.split("\n")
 
 setup(
     name='polling',
@@ -16,6 +16,6 @@ setup(
     url='http://github.com/justiniso/polling',
     download_url='',
     py_modules=['polling'],
-    install_requires=requirements,
+    tests_require=requirements_tests,
     test_suite='tests'
 )
