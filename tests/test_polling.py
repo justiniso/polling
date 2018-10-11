@@ -1,3 +1,4 @@
+import time
 import unittest
 from mock import patch
 
@@ -81,3 +82,19 @@ class TestPoll(unittest.TestCase):
             assert e.last is False, 'The last value was incorrect'
         else:
             assert False, 'No MaxCallException raised'
+
+    def test_max_call_no_sleep(self):
+        """
+        Test that a MaxCallException will be raised without sleeping after the last call
+        """
+        tries = 2
+        sleep = 5
+        start_time = time.time()
+
+        try:
+            polling.poll(lambda: False, step=sleep, max_tries=tries)
+        except polling.MaxCallException as e:
+            assert int(time.time() - start_time) <= (tries - 1) * sleep, 'Poll function slept before MaxCallException'
+        else:
+            assert False, 'No MaxCallException raised'
+
