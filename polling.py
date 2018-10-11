@@ -99,9 +99,6 @@ def poll(target, step, args=(), kwargs=None, timeout=None, max_tries=None, check
     last_item = None
     while True:
 
-        if max_tries is not None and tries >= max_tries:
-            raise MaxCallException(values, last_item)
-
         try:
             val = target(*args, **kwargs)
             last_item = val
@@ -114,6 +111,10 @@ def poll(target, step, args=(), kwargs=None, timeout=None, max_tries=None, check
 
         values.put(last_item)
         tries += 1
+
+        # Check the max tries at this point so it will not sleep before raising the exception
+        if max_tries is not None and tries >= max_tries:
+            raise MaxCallException(values, last_item)
 
         # Check the time after to make sure the poll function is called at least once
         if max_time is not None and time.time() >= max_time:
