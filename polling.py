@@ -42,7 +42,7 @@ def is_truthy(val):
 
 
 def poll(target, step, args=(), kwargs=None, timeout=None, max_tries=None, check_success=is_truthy,
-         step_function=step_constant, ignore_exceptions=(), poll_forever=False, collect_values=None, *a, **k):
+         step_function=step_constant, ignore_exceptions=(), poll_forever=False, collect_values=None):
     """Poll by calling a target function until a certain condition is met. You must specify at least a target
     function to be called and the step -- base wait time between each function call.
 
