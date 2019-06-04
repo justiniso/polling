@@ -117,6 +117,7 @@ polling2.poll(
 # Release notes
 
 ## 0.4.0
+- No longer testing on python 2.6
 - Creation of polling2, forked from polling as previous maintainer seems to be ignoring issues and pull-requests.
 - Remove ```*a, **k``` from poll signature. This allows Type errors to be raised if caller spells arguments into correctly, making bugs easier to find.
 
