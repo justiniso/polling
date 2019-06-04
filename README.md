@@ -1,20 +1,22 @@
-[![Build Status](https://travis-ci.org/justiniso/polling.svg?branch=master)](https://travis-ci.org/justiniso/polling)
-[![PyPI](https://img.shields.io/pypi/dm/polling.svg)]()
-[![PyPI](https://img.shields.io/pypi/v/polling.svg)]()
+[![Build Status](https://travis-ci.org/ddmee/polling2.svg?branch=master)](https://travis-ci.org/ddmee/polling2)
+[![PyPI](https://img.shields.io/pypi/dm/polling2.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/polling2.svg)]()
 
-polling
+polling2
 =============
 
-Polling is a powerful python utility used to wait for a function to return a certain expected condition.
+Polling2 is a powerful python utility used to wait for a function to return a certain expected condition.
 Some possible uses cases include:
 
 - Wait for API response to return with code 200
 - Wait for a file to exist (or not exist)
 - Wait for a thread lock on a resource to expire
 
+Polling2 is a fork of the original [polling](https://github.com/justiniso/polling). It was forked when the original maintainer failed to respond to issues or PRs. 
+
 # Installation
 
-    pip install polling
+    pip install polling2
 
 # Examples
 
@@ -22,7 +24,7 @@ Some possible uses cases include:
 
 ```python
 import requests
-polling.poll(
+polling2.poll(
     lambda: requests.get('http://google.com').status_code == 200,
     step=60,
     poll_forever=True)
@@ -32,7 +34,7 @@ If you are creating a new cloud provider instance (e.g. waiting for an EC2 insta
 
 ```python
 import requests
-polling.poll(
+polling2.poll(
     lambda: requests.get('your.instance.ip').status_code == 200,
     step=60,
     ignore_exceptions=(requests.exceptions.ConnectionError,),
@@ -43,7 +45,7 @@ polling.poll(
 
 ```python
 # This call will wait until the file exists, checking every 0.1 seconds and stopping after 3 seconds have elapsed
-file_handle = polling.poll(
+file_handle = polling2.poll(
     lambda: open('/tmp/myfile.txt'),
     ignore_exceptions=(IOError,),
     timeout=3,
@@ -60,7 +62,7 @@ from selenium import webdriver
 driver = webdriver.Firefox()
 
 driver.get('http://google.com')
-search_box = polling.poll(
+search_box = polling2.poll(
     lambda: driver.find_element_by_id('search'),
     step=0.5,
     timeout=7)
@@ -77,8 +79,8 @@ search_box.send_keys('python polling')
 
 import random
 try:
-    polling.poll(lambda: random.choice([0, (), False]), step=0.5, timeout=1)
-except polling.TimeoutException, te:
+    polling2.poll(lambda: random.choice([0, (), False]), step=0.5, timeout=1)
+except polling2.TimeoutException, te:
     while not te.values.empty():
         # Print all of the values that did not meet the exception
         print te.values.get()
@@ -94,7 +96,7 @@ def is_correct_response(response):
     """Check that the response returned 'success'"""
     return response == 'success'
 
-polling.poll(
+polling2.poll(
     lambda: requests.put('http://mysite.com/api/user', data={'username': 'Jill'},
     check_success=is_correct_response,
     step=1,
@@ -120,3 +122,6 @@ polling.poll(
 
 - First version
 
+# Contributors
+- Justin Iso (original creator)
+- Donal Mee

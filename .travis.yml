@@ -7,6 +7,6 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
 script:
-    coverage run --source=polling setup.py test
+    coverage run --source=polling2 setup.py test
 after_success:
   coveralls
