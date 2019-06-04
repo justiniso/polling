@@ -16,7 +16,18 @@ Polling2 is a fork of the original [polling](https://github.com/justiniso/pollin
 
 # Installation
 
-    pip install polling2
+```
+pip install polling2
+```
+
+# Development installation
+
+```
+# installs lib and test dependencies, probably advisable to use a virtualenv
+python setup.py install
+# run the tests
+pytest tests
+```
 
 # Examples
 

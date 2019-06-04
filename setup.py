@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from setuptools import setup, find_packages
-from polling import __version__
+from polling2 import __version__
 
 with open("./requirements.txt") as fp:
     requirements = fp.read()
