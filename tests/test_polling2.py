@@ -1,5 +1,6 @@
 import unittest
 from mock import patch
+import pytest
 
 import polling2
 
@@ -14,38 +15,29 @@ class TestPoll(unittest.TestCase):
         assert poll
         assert polling2
 
-    def test_arg_validation(self):
+    def test_arg_no_arg(self):
         """Tests various permutations of calling with invalid args"""
-
-        # No function
-        try:
+        with pytest.raises(TypeError):
             polling2.poll()
-        except TypeError:
-            pass
-        else:
-            assert False, 'No error raised with no args'
 
-        try:
+    def test_arg_no_step(self):
+        with pytest.raises(TypeError):
             polling2.poll(lambda: True)
-        except TypeError:
-            pass
-        else:
-            assert False, 'No error raised with no step'
 
-        try:
+    def test_no_poll_forever_or_maxtries(self):
+        """No error raised without specifying poll_forever or a timeout/max_tries"""
+        with pytest.raises(AssertionError):
             polling2.poll(lambda: True, step=1)
-        except AssertionError:
-            pass
-        else:
-            assert False, 'No error raised without specifying poll_forever or a timeout/max_tries'
 
-        try:
+    def test_poll_forever_with_timeout_max_tries(self):
+        with pytest.raises(AssertionError):
             polling2.poll(lambda: True, step=1, timeout=1, max_tries=1, poll_forever=True)
-        except AssertionError:
-            pass
-        else:
-            assert False, 'No error raised when specifying poll_forever with timeout/max_tries'
 
+    def test_type_error_when_misspelt_argnames(self):
+        with pytest.raises(TypeError):
+            polling2.poll(target=lambda: None, step=2, timeout=10, check_sucess=lambda rv: rv is None)
+
+    def test_valid_arg_options(self):
         # Valid options
         polling2.poll(lambda: True, step=1, poll_forever=True)
         polling2.poll(lambda: True, step=1, timeout=1)
