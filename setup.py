@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 from polling import __version__
 
-with open("./requirements.txt") as fp:
-    requirements = fp.read()
-    requirements = requirements.split("\n")
 
 setup(
     name='polling',
@@ -14,8 +11,12 @@ setup(
     author='Justin Iso',
     author_email='justin+polling@justiniso.com',
     url='http://github.com/justiniso/polling',
+    license='MIT',
     download_url='',
     py_modules=['polling'],
-    install_requires=requirements,
+    tests_require=[
+        'mock==3.0.5',
+        'pytest==5.1.1'
+    ],
     test_suite='tests'
 )
