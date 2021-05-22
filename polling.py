@@ -1,6 +1,6 @@
 """Polling module containing all exceptions and helpers used for the polling function"""
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 
 import time
 try:
